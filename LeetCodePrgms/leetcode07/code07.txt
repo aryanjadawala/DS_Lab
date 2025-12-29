@@ -1,0 +1,27 @@
+struct ListNode* detectCycle(struct ListNode* head) {
+    struct ListNode* f = head;
+    struct ListNode* s = head;
+    int loop = 0;
+
+    if (f!=NULL && f->next != NULL) {
+        while (f != NULL && f->next != NULL) {
+            s = s->next;
+            f = f->next->next;
+
+            if (f == s) {
+                loop = 1;
+                break;
+            }
+        }
+
+        if (loop) {
+            f = head;
+            while (f != s) {
+                f = f->next;
+                s = s->next;
+            }
+            return f;
+        }
+    }
+    return NULL;
+}
